@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigación EdTech con IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Soft Emerald -->
+    <!-- Application Structure Plan: Se ha diseñado una SPA con una navegación superior por pestañas (Inicio, Stack, Arquitectura, Librerías, Fases, Analítica). Esta estructura permite al usuario explorar la investigación en un orden lógico o saltar a la sección de su interés. La "Arquitectura" se visualiza con un diagrama HTML/Tailwind para mostrar flujos, y la "Analítica" usa Chart.js para un ejemplo práctico, haciendo que los datos de la investigación sean interactivos y fáciles de digerir en lugar de un informe estático. -->
+    <!-- Visualization & Content Choices: 
+        - Info: Características Clave IA -> Goal: Informar -> Viz: Lista con iconos (HTML/Tailwind) -> Interaction: Estática -> Justification: Claridad y rápida asimilación.
+        - Info: Stack Tecnológico -> Goal: Organizar -> Viz: Tarjetas interactivas (HTML/Tailwind) -> Interaction: Hover (escala/sombra) -> Justification: Presentación moderna y atractiva de las tecnologías.
+        - Info: Flujo de Arquitectura -> Goal: Relaciones -> Viz: Diagrama de flujo (HTML/Flexbox) -> Interaction: Visual estático -> Justification: Esencial para entender la conexión de los sistemas.
+        - Info: Fases de Desarrollo -> Goal: Proceso -> Viz: Línea de tiempo vertical (HTML/Tailwind) -> Interaction: Estática -> Justification: Muestra el proceso de forma clara y secuencial.
+        - Info: Métricas de Estudiante (Ejemplo) -> Goal: Comparar/Informar -> Viz: Gráfico de Barras y Dona (Chart.js) -> Interaction: Tooltips al pasar el mouse -> Justification: Demuestra una característica clave de la plataforma (analítica) y cumple con el requisito de la librería.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        .nav-btn {
+            transition: all 0.3s ease;
+        }
+        .nav-btn.active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-emerald-800 mb-4">Investigación: Plataforma EdTech Innovadora con IA</h1>
+            <p class="text-lg text-slate-600">Un análisis sobre el desarrollo de una plataforma educativa que integra Inteligencia Artificial y Machine Learning utilizando un stack de JavaScript moderno.</p>
+        </header>
+
+        <nav class="mb-8 flex flex-wrap gap-2 md:gap-4">
+            <button class="nav-btn active text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-emerald-700 text-white shadow-lg" data-target="page-inicio">
+                🚀 Inicio
+            </button>
+            <button class="nav-btn text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-white text-emerald-700 border border-emerald-300 hover:bg-emerald-50" data-target="page-stack">
+                🛠️ Stack Tecnológico
+            </button>
+            <button class="nav-btn text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-white text-emerald-700 border border-emerald-300 hover:bg-emerald-50" data-target="page-arquitectura">
+                🏗️ Arquitectura IA/ML
+            </button>
+            <button class="nav-btn text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-white text-emerald-700 border border-emerald-300 hover:bg-emerald-50" data-target="page-librerias">
+                📚 Librerías Clave
+            </button>
+            <button class="nav-btn text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-white text-emerald-700 border border-emerald-300 hover:bg-emerald-50" data-target="page-fases">
+                🗺️ Fases de Desarrollo
+            </button>
+            <button class="nav-btn text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-white text-emerald-700 border border-emerald-300 hover:bg-emerald-50" data-target="page-analitica">
+                📊 Dashboard Ejemplo
+            </button>
+        </nav>
+
+        <main id="content-container">
+
+            <section id="page-inicio" class="page-content bg-white p-6 md:p-8 rounded-2xl shadow-xl animate-fade-in">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-6">Concepto: EdTech Innovador</h2>
+                <p class="text-slate-600 text-lg mb-6">
+                    Una plataforma EdTech innovadora va más allá de ser un repositorio de videos. Utiliza la IA y el ML para crear experiencias de aprendizaje profundamente personalizadas, interactivas y eficientes. El objetivo es pasar de un modelo de "talla única" a un ecosistema educativo que se adapta a cada estudiante.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-emerald-50 p-6 rounded-lg border border-emerald-200">
+                        <span class="text-4xl mb-3 block">🧠</span>
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Aprendizaje Adaptativo</h3>
+                        <p class="text-slate-700">El sistema ajusta la dificultad y el contenido en tiempo real según el rendimiento del estudiante, utilizando modelos de ML para identificar fortalezas y debilidades.</p>
+                    </div>
+                    <div class="bg-emerald-50 p-6 rounded-lg border border-emerald-200">
+                        <span class="text-4xl mb-3 block">🤖</span>
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Tutores de IA (Chatbots)</h3>
+                        <p class="text-slate-700">Integración de LLMs (como la API de ChatGPT) para proveer asistencia 24/7, responder preguntas complejas y simular conversaciones prácticas.</p>
+                    </div>
+                    <div class="bg-emerald-50 p-6 rounded-lg border border-emerald-200">
+                        <span class="text-4xl mb-3 block">📈</span>
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Análisis Predictivo</h3>
+                        <p class="text-slate-700">Usar ML para analizar patrones de comportamiento y predecir qué estudiantes están en riesgo de quedarse atrás, permitiendo una intervención temprana.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-stack" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-xl animate-fade-in">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-6">Stack Tecnológico Propuesto</h2>
+                <p class="text-slate-600 text-lg mb-8">
+                    La selección del stack es crucial. Se prioriza un ecosistema basado en JavaScript por su universalidad (frontend y backend), pero reconociendo la necesidad de integrar servicios especializados de IA/ML.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Frontend: Next.js (React)</h3>
+                        <p class="text-slate-700">Ideal por su renderizado del lado del servidor (SSR) y generación de sitios estáticos (SSG), mejorando el SEO y la performance. HTML5 es la base semántica.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Backend: Node.js + ExpressJS</h3>
+                        <p class="text-slate-700">Maneja la lógica de negocio, APIs REST/GraphQL y la comunicación en tiempo real (WebSockets). Sirve como el "cerebro" que conecta todo.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Diseño UI/UX: Figma</h3>
+                        <p class="text-slate-700">Esencial para diseñar, prototipar y testear los flujos de usuario y la interfaz antes de escribir código, asegurando una experiencia cohesiva.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">IA Conversacional: API de ChatGPT</h3>
+                        <p class="text-slate-700">La forma más rápida y potente de integrar un tutor de IA. El backend (Node.js) gestionaría las llamadas a esta API de forma segura.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">ML Personalizado: Python / TensorFlow.js</h3>
+                        <p class="text-slate-700">Para modelos propios (aprendizaje adaptativo, predictivo), la ruta más robusta es un microservicio en Python. TensorFlow.js es una opción para inferencia en el cliente/servidor Node.</g>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-slate-100">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Nota sobre AngularJS</h3>
+                        <p class="text-slate-700">AngularJS (v1) es una tecnología legada. El framework moderno es Angular (v2+). Dado que se mencionó Next.js, el ecosistema React es la ruta recomendada aquí.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="page-arquitectura" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-xl animate-fade-in">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-6">Modelo de Arquitectura IA/ML</h2>
+                <p class="text-slate-600 text-lg mb-8">
+                    La clave no es entrenar modelos de ML complejos en JavaScript. La clave es que el stack de JavaScript (Next.js + Node.js) actúe como el orquestador central que consume servicios de IA/ML especializados. Esta arquitectura de microservicios es escalable y flexible.
+                </p>
+                <div class="w-full overflow-x-auto p-4 bg-slate-50 rounded-lg border border-slate-200">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-around text-center min-w-max md:min-w-full">
+
+                        <div class="flex-shrink-0 p-6 bg-white border-2 border-emerald-500 rounded-lg shadow-lg">
+                            <h4 class="font-bold text-lg text-emerald-700">CLIENTE</h4>
+                            <p>(Next.js en el navegador)</p>
+                        </div>
+
+                        <div class="text-4xl font-bold text-emerald-500 my-4 md:my-0 md:mx-4">→</div>
+
+                        <div class="flex-shrink-0 p-6 bg-white border-2 border-emerald-500 rounded-lg shadow-lg">
+                            <h4 class="font-bold text-lg text-emerald-700">BACKEND (API)</h4>
+                            <p>(Node.js + ExpressJS)</p>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="text-4xl font-bold text-emerald-500 my-4 md:my-0 md:mx-4">↘</div>
+                            
+                            <div class="flex flex-col gap-4 w-full md:w-auto">
+                                <div class="flex items-center">
+                                    <div class="text-4xl font-bold text-emerald-500 my-4 md:my-0 md:mx-4 hidden md:block">→</div>
+                                    <div class="flex-shrink-0 p-4 bg-white border border-blue-400 rounded-lg shadow-md w-full">
+                                        <h4 class="font-bold text-blue-600">API Externa</h4>
+                                        <p>(Ej: API de ChatGPT)</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center mt-4 md:mt-0">
+                                    <div class="text-4xl font-bold text-emerald-500 my-4 md:my-0 md:mx-4 hidden md:block">→</div>
+                                    <div class="flex-shrink-0 p-4 bg-white border border-purple-400 rounded-lg shadow-md w-full">
+                                        <h4 class="font-bold text-purple-600">Microservicio ML</h4>
+                                        <p>(Python, TensorFlow.js)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-librerias" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-xl animate-fade-in">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-6">Librerías y Herramientas Clave</h2>
+                <p class="text-slate-600 text-lg mb-8">
+                    Además de los frameworks principales, estas librerías son fundamentales para construir las características de la plataforma.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">TensorFlow.js</h3>
+                        <p class="text-slate-700">Permite ejecutar modelos de ML directamente en el navegador (para inferencia en tiempo real, como detectar la postura en un video) o en el servidor Node.js.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Chart.js</h3>
+                        <p class="text-slate-700">Esencial para los paneles de analítica. Permite crear gráficos interactivos (barras, donas, líneas) para mostrar el progreso del estudiante y métricas de la plataforma.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Axios / Fetch API</h3>
+                        <p class="text-slate-700">Fundamentales para la comunicación HTTP entre el frontend (Next.js) y los diferentes backends (Node.js, microservicios de ML, API de ChatGPT).</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Socket.io</h3>
+                        <p class="text-slate-700">Para características en tiempo real como notificaciones, colaboración en vivo o la interacción fluida con el tutor de IA sin recargar la página.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Prisma / Sequelize</h3>
+                        <p class="text-slate-700">ORMs (Object-Relational Mappers) que simplifican enormemente la interacción con la base de datos (Ej: PostgreSQL, MySQL) desde el backend de Node.js.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h3 class="text-xl font-semibold text-emerald-800 mb-2">NextAuth.js / Passport.js</h3>
+                        <p class="text-slate-700">Librerías cruciales para manejar la autenticación de usuarios (inicio de sesión, registro, perfiles) de forma segura y robusta.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-fases" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-xl animate-fade-in">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-6">Fases de Desarrollo</h2>
+                <p class="text-slate-600 text-lg mb-8">
+                    Un proyecto de esta magnitud debe abordarse en fases claras y manejables, integrando la complejidad de la IA de forma incremental.
+                </p>
+                <ol class="relative border-l border-emerald-300">                  
+                    <li class="mb-10 ml-6">            
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-emerald-100 rounded-full -left-4 ring-8 ring-white">
+                            <span class="font-bold text-emerald-700">1</span>
+                        </span>
+                        <h3 class="flex items-center text-xl font-semibold text-slate-900">Descubrimiento y Diseño UX/UI
+                            <span class="bg-emerald-100 text-emerald-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Figma</span>
+                        </h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-slate-500">Semanas 1-4</time>
+                        <p class="mb-4 text-base font-normal text-slate-600">Definición de features, user personas, flujos de usuario y prototipado de alta fidelidad. Es la base de todo el proyecto.</p>
+                    </li>
+                    <li class="mb-10 ml-6">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-emerald-100 rounded-full -left-4 ring-8 ring-white">
+                            <span class="font-bold text-emerald-700">2</span>
+                        </span>
+                        <h3 class="text-xl font-semibold text-slate-900">Desarrollo del "Core"</h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-slate-500">Semanas 5-12</time>
+                        <p class="text-base font-normal text-slate-600">Construcción de la plataforma base sin IA: autenticación de usuarios, sistema de gestión de contenidos (CMS), estructura de cursos y renderizado de contenido (Next.js + Node.js).</p>
+                    </li>
+                    <li class="mb-10 ml-6">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-emerald-100 rounded-full -left-4 ring-8 ring-white">
+                            <span class="font-bold text-emerald-700">3</span>
+                        </span>
+                        <h3 class="flex items-center text-xl font-semibold text-slate-900">Integración de IA (Nivel 1)
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">API de ChatGPT</span>
+                        </h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-slate-500">Semanas 13-16</time>
+                        <p class="text-base font-normal text-slate-600">Integrar servicios de IA "plug-and-play". El primer gran hito es el tutor conversacional, conectando el backend de Node.js a la API de ChatGPT.</p>
+                    </li>
+                    <li class="mb-10 ml-6">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-emerald-100 rounded-full -left-4 ring-8 ring-white">
+                            <span class="font-bold text-emerald-700">4</span>
+                        </span>
+                        <h3 class="flex items-center text-xl font-semibold text-slate-900">Integración de ML (Nivel 2)
+                            <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Custom</span>
+                        </h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-slate-500">Semanas 17-24</time>
+                        <p class="text-base font-normal text-slate-600">Desarrollo e integración de modelos propios. Empezar con el análisis predictivo (recopilar datos y entrenar) y luego pasar al aprendizaje adaptativo. Aquí es donde se crea la ventaja competitiva.</p>
+                    </li>
+                    <li class="ml-6">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-emerald-100 rounded-full -left-4 ring-8 ring-white">
+                            <span class="font-bold text-emerald-700">5</span>
+                        </span>
+                        <h3 class="text-xl font-semibold text-slate-900">Pruebas Beta y Despliegue</h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-slate-500">Semanas 25+</time>
+                        <p class="text-base font-normal text-slate-600">Lanzamiento a un grupo cerrado de usuarios, recolección de feedback, corrección de errores y preparación para el despliegue público.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="page-analitica" class="page-content hidden bg-white p-6 md:p-8 rounded-2xl shadow-xl animate-fade-in">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-6">Ejemplo: Dashboard de Analítica</h2>
+                <p class="text-slate-600 text-lg mb-8">
+                    Una función central de una plataforma EdTech de IA es la analítica. Los estudiantes y profesores necesitan ver el progreso de forma clara. Aquí es donde <code class="bg-emerald-100 text-emerald-700 px-1 rounded">Chart.js</code> es fundamental.
+                </p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-100">
+                        <h3 class="text-xl font-semibold text-center text-slate-700 mb-4">Progreso del Estudiante por Módulo</h3>
+                        <div class="chart-container">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-100">
+                        <h3 class="text-xl font-semibold text-center text-slate-700 mb-4">Distribución del Tiempo de Estudio</h3>
+                        <div class="chart-container">
+                            <canvas id="timeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const pages = document.querySelectorAll('.page-content');
+            let chartsInitialized = false;
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+
+                    pages.forEach(page => {
+                        page.classList.add('hidden');
+                    });
+                    
+                    document.getElementById(targetId).classList.remove('hidden');
+
+                    navButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-emerald-700', 'text-white', 'shadow-lg');
+                        btn.classList.add('bg-white', 'text-emerald-700', 'border', 'border-emerald-300', 'hover:bg-emerald-50');
+                    });
+                    
+                    button.classList.add('active', 'bg-emerald-700', 'text-white', 'shadow-lg');
+                    button.classList.remove('bg-white', 'text-emerald-700', 'border', 'border-emerald-300', 'hover:bg-emerald-50');
+
+                    if (targetId === 'page-analitica' && !chartsInitialized) {
+                        initAnalyticsCharts();
+                        chartsInitialized = true;
+                    }
+                });
+            });
+
+            function initAnalyticsCharts() {
+                const ctxProgress = document.getElementById('progressChart')?.getContext('2d');
+                if (ctxProgress) {
+                    new Chart(ctxProgress, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Módulo 1: Intro', 'Módulo 2: Core JS', 'Módulo 3: React', 'Módulo 4: Node.js', 'Módulo 5: IA/ML'],
+                            datasets: [{
+                                label: 'Progreso (%)',
+                                data: [100, 80, 60, 45, 20],
+                                backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                                borderColor: 'rgba(16, 185, 129, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    ticks: {
+                                        callback: function(value) {
+                                            return value + '%'
+                                        }
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return `Completado: ${context.raw}%`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                const ctxTime = document.getElementById('timeChart')?.getContext('2d');
+                if (ctxTime) {
+                    new Chart(ctxTime, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Viendo Lecciones', 'Haciendo Quizzes', 'Usando Tutor de IA', 'Proyectos Prácticos'],
+                            datasets: [{
+                                label: 'Horas',
+                                data: [12, 4, 6, 8],
+                                backgroundColor: [
+                                    'rgba(5, 150, 105, 0.7)',
+                                    'rgba(2, 132, 199, 0.7)',
+                                    'rgba(217, 119, 6, 0.7)',
+                                    'rgba(192, 38, 211, 0.7)'
+                                ],
+                                borderColor: [
+                                    'rgba(5, 150, 105, 1)',
+                                    'rgba(2, 132, 199, 1)',
+                                    'rgba(217, 119, 6, 1)',
+                                    'rgba(192, 38, 211, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return `${context.label}: ${context.raw} horas`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
